@@ -1,0 +1,42 @@
+# Binaries
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go build cache
+*.test
+*.out
+/vendor/
+
+# Environment variables — never commit secrets
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# IDE / editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.iml
+
+# Docker volumes (if ever stored locally)
+pgdata/
+minio_data/
+
+# sqlc generated files are intentionally committed
+# (they are type-safe generated code, part of the build)
+
+# Air (live reload tool, if added later)
+tmp/

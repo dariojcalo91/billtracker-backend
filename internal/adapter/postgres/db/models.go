@@ -21,6 +21,15 @@ type Bill struct {
 	UpdatedAt       pgtype.Timestamptz `json:"updated_at"`
 }
 
+type Payment struct {
+	ID           pgtype.UUID        `json:"id"`
+	BillID       pgtype.UUID        `json:"bill_id"`
+	Month        string             `json:"month"`
+	AmountPaid   pgtype.Numeric     `json:"amount_paid"`
+	ProofFileUrl pgtype.Text        `json:"proof_file_url"`
+	PaidAt       pgtype.Timestamptz `json:"paid_at"`
+}
+
 type User struct {
 	ID           pgtype.UUID        `json:"id"`
 	Email        string             `json:"email"`

@@ -12,12 +12,15 @@ import (
 
 type Querier interface {
 	CreateBill(ctx context.Context, arg CreateBillParams) (Bill, error)
+	CreatePayment(ctx context.Context, arg CreatePaymentParams) (Payment, error)
 	CreateUser(ctx context.Context, arg CreateUserParams) (User, error)
 	DeleteBill(ctx context.Context, arg DeleteBillParams) error
 	GetBillByID(ctx context.Context, arg GetBillByIDParams) (Bill, error)
+	GetPaymentByBillAndMonth(ctx context.Context, arg GetPaymentByBillAndMonthParams) (Payment, error)
 	GetUserByEmail(ctx context.Context, email string) (User, error)
 	GetUserByID(ctx context.Context, id pgtype.UUID) (User, error)
 	ListBillsByUser(ctx context.Context, userID pgtype.UUID) ([]Bill, error)
+	ListPaymentsByUserAndMonth(ctx context.Context, arg ListPaymentsByUserAndMonthParams) ([]Payment, error)
 	UpdateBill(ctx context.Context, arg UpdateBillParams) (Bill, error)
 }
 

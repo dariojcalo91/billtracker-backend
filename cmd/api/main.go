@@ -37,14 +37,16 @@ func main() {
 		jwtSecret = "dev-secret-change-me"
 	}
 	billRepo := postgres.NewBillRepository(pool)
+	paymentRepo := postgres.NewPaymentRepository(pool)
 
 	registerSvc := usecase.NewRegisterService(userRepo)
 	loginSvc := usecase.NewLoginService(userRepo, jwtSecret)
 	billSvc := usecase.NewBillService(billRepo)
+	dashboardSvc := usecase.NewDashboardService(billRepo, paymentRepo)
 
 	authHandler := httpadapter.NewAuthHandler(registerSvc, loginSvc)
-
 	billHandler := httpadapter.NewBillHandler(billSvc)
+	dashboardHandler := httpadapter.NewDashboardHandler(dashboardSvc)
 
 	router := gin.Default()
 
@@ -63,6 +65,7 @@ func main() {
 		protected.GET("/bills/:id", billHandler.Get)
 		protected.PUT("/bills/:id", billHandler.Update)
 		protected.DELETE("/bills/:id", billHandler.Delete)
+		protected.GET("/dashboard", dashboardHandler.Get)
 	}
 
 	log.Println("server starting on :8080")
